@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- Load properties file -->
+    <context:property-placeholder location="car.properties"/>
+
+    <!-- Car Bean -->
+    <bean id="myCar" class="com.travels.service.Car" scope="prototype">
+        <property name="discountService" ref="myDiscountService"/>
+        <property name="maximumRetailPrice" value="${car.mrp}"/>
+    </bean>
+
+    <!-- Discount Service -->
+    <bean id="myDiscountService"
+          class="com.travels.service.DiscountServiceImpl"/>
+
+    <!-- Bus Bean -->
+    <bean id="myBus" class="com.travels.service.Bus">
+        <property name="discountService" ref="myDiscountService"/>
+        <property name="maximumRetailPrice" value="1000000"/>
+    </bean>
+
+</beans>
